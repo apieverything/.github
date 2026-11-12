@@ -61,7 +61,6 @@ Connectors may have different stability levels depending on the integrated servi
 - Transparent
 - Respectful of user data
 - No mandatory intermediary service
-- No authentication or security bypasses
 
 ## Repositories
 
