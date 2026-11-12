@@ -138,6 +138,8 @@ git push origin feat/my-change
 
 ## License
 
-Distributed under the MIT License.
+Distributed under the MIT License with an attribution notice.
 
-See the [`LICENSE`](LICENSE) file.
+See [`LICENSE.md`](../LICENSE.md). Use, modification and redistribution are
+permitted; any project built on this work elsewhere must visibly credit
+**API Everything**.
