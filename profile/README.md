@@ -14,7 +14,7 @@
 API Everything is an open-source organization providing self-hostable connectors for services such as:
 
 ```
-Work in Progress
+Instagram — profile stats and posts (URL, description, hashtags, comments, date, likes, photos)
 ```
 
 The goal is to reduce reliance on paid API providers while keeping control over your infrastructure and data.
@@ -46,7 +46,33 @@ Each service is integrated through an independent connector, developed as its ow
 
 ## Example
 
-A FAIRE
+Each connector is a standalone HTTP service. See [`connectors/socials/instagram`](../../connectors/socials/instagram/README.md) for setup and the cookie-based session configuration.
+
+```bash
+cd connectors/socials/instagram
+cp .env.example .env          # add your own IG_SESSIONID
+docker compose up -d
+```
+
+```bash
+curl "http://localhost:3000/v1/instagram/kametolol"
+curl "http://localhost:3000/v1/instagram/kametolol/posts?limit=12"
+```
+
+```json
+{
+  "url": "https://www.instagram.com/p/Cxxxxxxx/",
+  "userPosted": "kametolol",
+  "description": "Great night #Kameto",
+  "hashtags": ["#Kameto"],
+  "numComments": 142,
+  "datePosted": "2025-09-14T18:32:07.000Z",
+  "likes": 28411,
+  "photos": ["https://scontent-xxx.cdninstagram.com/...jpg"]
+}
+```
+
+There is no hosted instance: you run it on your own machine, with your own IP and your own session. Optional rotating residential proxies can be configured per instance. That is what makes it free, unlimited, and independent of any intermediary.
 
 ## Status
 
