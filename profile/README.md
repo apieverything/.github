@@ -84,7 +84,7 @@ curl "http://localhost:3000/v1/instagram/kametolol/posts?limit=12"
 
 There is no hosted instance: you run it on your own machine, with your own IP. Optional rotating residential proxies can be configured per instance. That is what makes it free, unlimited, and independent of any intermediary.
 
-The [`core`](https://github.com/apieverything/core) gateway optionally fronts every connector with a single API key and weighted credits. It is optional — connectors keep full functionality without it.
+The [`core`](https://github.com/apieverything/core) gateway optionally fronts every connector with one account and rotatable API keys: a 16-digit unlock code opens the account, `ae_…` API keys (created, reset and revoked inside it) are the only credentials accepted for API calls, and weighted credits follow the account. It is optional — connectors keep full functionality without it.
 
 ## Status
 
@@ -102,9 +102,10 @@ Connectors may have different stability levels depending on the integrated servi
 
 ## Repositories
 
-- [`core`](https://github.com/apieverything/core) — Unified gateway: one API key, weighted credits, zero data retention
+- [`infra`](https://github.com/apieverything/infra) — One-command local deployment (`./deploy.sh`)
+- [`core`](https://github.com/apieverything/core) — Unified gateway: 16-digit unlock code, rotatable API keys, weighted credits, zero data retention
 - [`connectors`](https://github.com/apieverything/connectors) — Official service connectors (Instagram, LinkedIn, TikTok)
-- [`web`](https://github.com/apieverything/web) — Public website
+- [`web`](https://github.com/apieverything/web) — Public website and dashboard
 - [`docs`](https://github.com/apieverything/docs) — Documentation
 
 ## Installation
