@@ -46,11 +46,11 @@ Each service is integrated through an independent connector, developed as its ow
 
 ## Example
 
-Each connector is a standalone HTTP service. See [`connectors/socials/instagram`](../../connectors/socials/instagram/README.md) for setup and the cookie-based session configuration.
+Each connector is a standalone HTTP service. See [`connectors/socials/instagram`](../../connectors/socials/instagram/README.md) for setup. Public data needs **no account and no session cookie**.
 
 ```bash
 cd connectors/socials/instagram
-cp .env.example .env          # add your own IG_SESSIONID
+cp .env.example .env          # optional for public data
 docker compose up -d
 ```
 
@@ -61,18 +61,30 @@ curl "http://localhost:3000/v1/instagram/kametolol/posts?limit=12"
 
 ```json
 {
-  "url": "https://www.instagram.com/p/Cxxxxxxx/",
-  "userPosted": "kametolol",
-  "description": "Great night #Kameto",
-  "hashtags": ["#Kameto"],
-  "numComments": 142,
-  "datePosted": "2025-09-14T18:32:07.000Z",
-  "likes": 28411,
-  "photos": ["https://scontent-xxx.cdninstagram.com/...jpg"]
+  "username": "kametolol",
+  "profile": { "followers": 401268, "following": 368, "posts": 35, "fullName": "Kameto" },
+  "count": 1,
+  "posts": [
+    {
+      "url": "https://www.instagram.com/p/Cxxxxxxx/",
+      "userPosted": "kametolol",
+      "description": "Great night #Kameto",
+      "hashtags": ["#Kameto"],
+      "numComments": 142,
+      "datePosted": "2026-11-12T15:07:23.000Z",
+      "likes": 28411,
+      "photos": ["https://scontent-xxx.cdninstagram.com/...jpg"],
+      "type": "reel"
+    }
+  ],
+  "source": "anon_grid",
+  "strategy": "anon_grid"
 }
 ```
 
-There is no hosted instance: you run it on your own machine, with your own IP and your own session. Optional rotating residential proxies can be configured per instance. That is what makes it free, unlimited, and independent of any intermediary.
+There is no hosted instance: you run it on your own machine, with your own IP. Optional rotating residential proxies can be configured per instance. That is what makes it free, unlimited, and independent of any intermediary.
+
+The [`core`](https://github.com/apieverything/core) gateway optionally fronts every connector with a single API key and weighted credits. It is optional — connectors keep full functionality without it.
 
 ## Status
 
@@ -90,8 +102,9 @@ Connectors may have different stability levels depending on the integrated servi
 
 ## Repositories
 
-- [`core`](https://github.com/apieverything/core) — Main API gateway
-- [`connectors`](https://github.com/apieverything/connectors) — Official service connectors
+- [`core`](https://github.com/apieverything/core) — Unified gateway: one API key, weighted credits, zero data retention
+- [`connectors`](https://github.com/apieverything/connectors) — Official service connectors (Instagram, LinkedIn, TikTok)
+- [`web`](https://github.com/apieverything/web) — Public website
 - [`docs`](https://github.com/apieverything/docs) — Documentation
 
 ## Installation
