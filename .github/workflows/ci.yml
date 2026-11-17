@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Profile README references every repository
+        run: |
+          node -e '
+            const fs = require("fs");
+            const md = fs.readFileSync("profile/README.md", "utf8");
+            const repos = ["core", "connectors", "web", "docs"];
+            const missing = repos.filter((r) => !md.includes(`github.com/apieverything/${r}`));
+            if (missing.length) {
+              console.error("Missing repository links: " + missing.join(", "));
+              process.exit(1);
+            }
+            console.log("All 4 repositories documented");
+          '
